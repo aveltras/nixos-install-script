@@ -125,9 +125,9 @@ install() {
 	parted /dev/${INSTALL_DEVICE} -- mkpart primary linux-swap -${SWAP_PARTITION_SIZE} 100%
     fi
 
-    bootPartition=$(lsblk -lno NAME,TYPE,MOUNTPOINT | grep "${INSTALL_DEVICE}" | awk '{ if ($3 == "/boot")  print $1}')
-    swapPartition=$(lsblk -lno NAME,TYPE,MOUNTPOINT | grep "${INSTALL_DEVICE}" | awk '{ if ($3 == "[SWAP]")  print $1}')
-    rootPartition=$(lsblk -lno NAME,TYPE,MOUNTPOINT | grep "${INSTALL_DEVICE}" | awk '{ if ($3 == "/")  print $1}')
+    bootPartition=$(lsblk -lno NAME,FSTYPE | grep "${INSTALL_DEVICE}" | awk '{ if ($2 == "vfat")  print $1}')
+    swapPartition=$(lsblk -lno NAME,FSTYPE | grep "${INSTALL_DEVICE}" | awk '{ if ($2 == "swap")  print $1}')
+    rootPartition=$(lsblk -lno NAME,FSTYPE | grep "${INSTALL_DEVICE}" | awk '{ if ($2 == "ext4")  print $1}')
 
     echo "$swapPartition"
     echo "$rootPartition"
