@@ -73,7 +73,7 @@ choose_device() {
     display_title "Available devices"
     lsblk
     
-    CHOICES=$(lsblk -lnd | awk '{print $1;}')
+    CHOICES=$(lsblk -lndo NAME,TYPE| awk '{ if ($2 == "disk")  print $1}')
     printf "\n> \033[33;1mChoose device\033[0m\n"
     select device in "${CHOICES[@]}"; do
 	if [ -n "${device}" ]; then
