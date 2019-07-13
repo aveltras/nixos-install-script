@@ -128,6 +128,9 @@ install() {
     bootPartition=$(lsblk -lno NAME,TYPE,MOUNTPOINT | grep "${INSTALL_DEVICE}" | awk '{ if ($3 == "/boot")  print $1}')
     swapPartition=$(lsblk -lno NAME,TYPE,MOUNTPOINT | grep "${INSTALL_DEVICE}" | awk '{ if ($3 == "[SWAP]")  print $1}')
     rootPartition=$(lsblk -lno NAME,TYPE,MOUNTPOINT | grep "${INSTALL_DEVICE}" | awk '{ if ($3 == "/")  print $1}')
+
+    echo $swapPartition
+    echo $rootPartition
     
     echo "Formatting.."
 
