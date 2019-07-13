@@ -2,7 +2,7 @@
 
 set -e
 set -u
-set -x
+set +x
 
 # Configuration
 FIRMWARE_TYPE=
@@ -129,9 +129,6 @@ install() {
     swapPartition=$(lsblk -lno NAME,MAJ:MIN | grep "${INSTALL_DEVICE}" | awk '{ id=$2; split(id,idArr,":"); if (idArr[2] == 2) print $1 }')
     rootPartition=$(lsblk -lno NAME,MAJ:MIN | grep "${INSTALL_DEVICE}" | awk '{ id=$2; split(id,idArr,":"); if (idArr[2] == 1) print $1 }')
 
-    echo "$swapPartition"
-    echo "$rootPartition"
-    
     echo "Formatting.."
 
     mkfs.ext4 -L nixos /dev/${rootPartition}
