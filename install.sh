@@ -110,7 +110,8 @@ hardware_uuid_to_label() {
 }
 
 install() {
-    
+
+    set +x
     echo "Partitioning.."
     
     if [ "$FIRMWARE_TYPE" == "UEFI" ]; then
