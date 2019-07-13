@@ -2,7 +2,7 @@
 
 set -e
 set -u
-set +x
+set -x
 
 # Configuration
 FIRMWARE_TYPE=
@@ -111,7 +111,6 @@ hardware_uuid_to_label() {
 
 install() {
 
-    set +x
     echo "Partitioning.."
     
     if [ "$FIRMWARE_TYPE" == "UEFI" ]; then
